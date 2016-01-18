@@ -2,11 +2,41 @@ var app = angular.module('flapperNews', ['ui.router'])
 
 app.factory('posts', [function(){
 	var o = {
-		posts: [  {title: 'post 1', upvotes: 5},
-		{title: 'post 2', upvotes: 2},
-		{title: 'post 3', upvotes: 15},
-		{title: 'post 4', upvotes: 9},
-		{title: 'post 5', upvotes: 4}]
+		posts: [  {title:"Cat", 
+				link: "http://www.cat.com",
+				upvotes:0,
+				comments:[
+				{author: "Bob", body: "Cool", upvotes: 0}, 
+				{author: "Caty", body: "Grool", upvotes:0}]
+},
+		{title:"Cat5", 
+				link: "http://www.cat.com",
+				upvotes:0,
+				comments:[
+				{author: "Bob", body: "Cool", upvotes: 0}, 
+				{author: "Caty", body: "Grool", upvotes:0}]
+},
+		{title:"Cat4", 
+				link: "http://www.cat.com",
+				upvotes:0,
+				comments:[
+				{author: "Bob", body: "Cool", upvotes: 0}, 
+				{author: "Caty", body: "Grool", upvotes:0}]
+},
+		{title:"Cat3", 
+				link: "http://www.cat.com",
+				upvotes:0,
+				comments:[
+				{author: "Bob", body: "Cool", upvotes: 0}, 
+				{author: "Caty", body: "Grool", upvotes:0}]
+},
+		{title:"Cat2", 
+				link: "http://www.cat.com",
+				upvotes:0,
+				comments:[
+				{author: "Bob", body: "Cool", upvotes: 0}, 
+				{author: "Caty", body: "Grool", upvotes:0}]
+}]
 	};
 	return o;
 }]);
@@ -40,7 +70,8 @@ app.controller("PostsCtrl",[
 	function($scope, $stateParams, posts){
 		$scope.post = posts.posts[$stateParams.id];
 		$scope.addComment = function(){
-			if($scope.body === '') { return; }
+			if($scope.body==='') { alert("You need a body");
+			return; }
 			$scope.post.comments.push({
 				body: $scope.body,
 				author: 'user',
@@ -48,6 +79,9 @@ app.controller("PostsCtrl",[
 			});
 			$scope.body = '';
 		};
+		$scope.incrementPost=function(thing){
+			thing.upvotes++;
+		}
 	}
 
 	]);
@@ -68,13 +102,13 @@ app.controller('MainCtrl',[
 				comments:[
 				{author: "Bob", body: "Cool", upvotes: 0}, 
 				{author: "Caty", body: "Grool", upvotes:0}]
-				
+
 			});
 			$scope.title="";
 			$scope.link = '';
 		}
-		$scope.incrementPost=function(post){
-			post.upvotes++;
+		$scope.incrementPost=function(thing){
+			thing.upvotes++;
 		}
 	}
 	]);
